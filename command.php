@@ -17,7 +17,13 @@ switch ($_GET["a"]) {
     break;
   case "info":
     foreach ($redis->info() as $key => $value) {
-      echo "$key: $value<br />\n";
+      if (is_array($key)) {
+        foreach ($key as $k => $v) {
+          echo "$k: $v<br />\n";
+        }
+      } else {
+        echo "$key: $value<br />\n";
+      }
     }    
     break;
   case "flush":
